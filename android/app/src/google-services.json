@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "708053224224",
+    "firebase_url": "https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pabdatabase",
+    "storage_bucket": "pabdatabase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708053224224:android:a633d3bbe043ad7cb0a545",
+        "android_client_info": {
+          "package_name": "com.ntr.neuralboost"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYOOm7mImoHpM_Jd-STHPY8wvQ_nBmg5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708053224224:android:4028b8fd91b72bd4b0a545",
+        "android_client_info": {
+          "package_name": "com.ntr.neuroboost"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYOOm7mImoHpM_Jd-STHPY8wvQ_nBmg5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
