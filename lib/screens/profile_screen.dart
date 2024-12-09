@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
         title: Text('Profile'),
       ),
       body: Center(
-        child: Text('Profile Content'),
+        child: Text('View and edit your profile here'),
       ),
     );
   }

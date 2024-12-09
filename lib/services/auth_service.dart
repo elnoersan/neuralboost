@@ -6,7 +6,17 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<bool> createAccount(String email, String password) async {
+  Future<bool> signInWithEmail(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> signUpWithEmail(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -32,5 +42,9 @@ class AuthService {
       print(e);
       return false;
     }
+  }
+
+  bool isUserLoggedIn() {
+    return _auth.currentUser != null;
   }
 }

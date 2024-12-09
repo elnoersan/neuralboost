@@ -1,7 +1,7 @@
-// lib/screens/todo_list_menu.dart
+// lib/screens/todo_list_screen.dart
 import 'package:flutter/material.dart';
 
-class TodoListMenu extends StatelessWidget {
+class TodoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +9,7 @@ class TodoListMenu extends StatelessWidget {
         title: Text('To-Do List'),
       ),
       body: Center(
-        child: Text('To-Do List Content'),
+        child: Text('Manage your To-Do List here'),
       ),
     );
   }

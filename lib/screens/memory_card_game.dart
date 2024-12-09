@@ -9,7 +9,7 @@ class MemoryCardGame extends StatelessWidget {
         title: Text('Memory Card Game'),
       ),
       body: Center(
-        child: Text('Memory Card Game Content'),
+        child: Text('Play the Memory Card Game here'),
       ),
     );
   }
