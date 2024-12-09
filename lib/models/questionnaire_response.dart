@@ -1,12 +1,12 @@
 // lib/models/questionnaire_response.dart
-class QuestionResponse {
-  String answer;
+class QuestionnaireResponse {
+  List<String> responses;
 
-  QuestionResponse({required this.answer});
+  QuestionnaireResponse({required this.responses, required String answer});
 
   Map<String, dynamic> toMap() {
     return {
-      'answer': answer,
+      'responses': responses,
     };
   }
 }

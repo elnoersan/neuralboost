@@ -1,7 +1,7 @@
-// lib/services/mini_game_service.dart
+// lib/services/game_service.dart
 import 'package:firebase_database/firebase_database.dart';
 
-class MiniGameService {
+class GameService {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
 
   Future<void> saveScore(String gameName, int score) async {
