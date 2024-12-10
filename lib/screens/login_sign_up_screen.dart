@@ -1,3 +1,4 @@
+//lib\screens\login_sign_up_screen.dart
 import 'package:flutter/material.dart';
 import 'package:neuralboost/screens/home_screen.dart';
 import 'package:neuralboost/screens/questionnaire_screen.dart';
@@ -102,110 +103,125 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'Neural Boost',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                      ),
-                      validator: _validateEmail,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[200],
-                      ),
-                      validator: _validatePassword,
-                    ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _handleAuth,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
+                    Flexible(
                       child: Text(
-                        _isLogin ? 'Login' : 'Sign Up',
+                        'Neural Boost',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _isLogin = !_isLogin;
-                        });
-                      },
-                      child: Text(
-                        _isLogin
-                            ? 'Don’t have an account? Register here'
-                            : 'Already have an account? Sign in',
-                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                           color: Colors.blue,
-                          fontSize: 14,
                         ),
                       ),
                     ),
                     SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () async {
-                        bool isLoggedIn = await _authService.signInWithGoogle();
-                        if (isLoggedIn) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    Flexible(
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                        ),
+                        validator: _validateEmail,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Flexible(
+                      child: TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                        ),
+                        validator: _validatePassword,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Flexible(
+                      child: ElevatedButton(
+                        onPressed: _handleAuth,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          _isLogin ? 'Login' : 'Sign Up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            'assets/images/icons/google.png', // Path to your Google logo image
-                            height: 24,
-                            width: 24,
+                    ),
+                    SizedBox(height: 10),
+                    Flexible(
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _isLogin = !_isLogin;
+                          });
+                        },
+                        child: Text(
+                          _isLogin
+                              ? 'Don’t have an account? Register here'
+                              : 'Already have an account? Sign in',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 14,
                           ),
-                          SizedBox(width: 8),
-                          Text(
-                            'Continue with Google',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Flexible(
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          bool isLoggedIn =
+                              await _authService.signInWithGoogle();
+                          if (isLoggedIn) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image.asset(
+                              'assets/images/icons/google.png', // Path to your Google logo image
+                              height: 24,
+                              width: 24,
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                'Continue with Google',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
