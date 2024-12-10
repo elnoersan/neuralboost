@@ -1,4 +1,3 @@
-//lib\services\questionnaire_service.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -6,35 +5,38 @@ class QuestionnaireService {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> saveResponses(List<String> responses) async {
+  Future<void> saveResponses(
+      List<String> partAResponses, List<String> partBResponses) async {
     if (_auth.currentUser == null) {
       throw Exception('User is not authenticated');
     }
 
-    // Calculate ADHD status
-    bool hasADHD = _calculateADHDStatus(responses);
+    // Calculate ADHD status based on Part A responses
+    bool hasADHD = calculateADHDStatus(partAResponses);
 
-    // Save responses to Firebase
+    // Save data to Firebase
     await _database.child('questionnaire_responses').push().set({
-      'responses': responses,
+      'partAResponses': partAResponses,
+      'partBResponses': partBResponses,
       'userId': _auth.currentUser!.uid,
-      'hasADHD': hasADHD, // Save ADHD status
+      'hasADHD': hasADHD,
     });
 
     // Update user profile with ADHD status
     await _updateUserProfile(hasADHD);
   }
 
-  bool _calculateADHDStatus(List<String> responses) {
-    // Example logic: If more than 4 responses are "Often" or "Very Often", the user has ADHD
-    int oftenCount = responses
-        .where((answer) => answer == 'Often' || answer == 'Very Often')
-        .length;
-    return oftenCount >= 4;
+  // Public method to calculate ADHD status
+  bool calculateADHDStatus(List<String> partAResponses) {
+    // Check for responses in shaded boxes
+    const shadedAnswers = ['Often', 'Very Often'];
+    int shadedCount =
+        partAResponses.where((answer) => shadedAnswers.contains(answer)).length;
+
+    return shadedCount >= 4; // Part A threshold as per ASRS guidelines
   }
 
   Future<void> _updateUserProfile(bool hasADHD) async {
-    // Update user profile in Firebase
     await _database.child('users').child(_auth.currentUser!.uid).update({
       'hasADHD': hasADHD,
     });

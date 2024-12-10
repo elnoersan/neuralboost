@@ -1,5 +1,6 @@
-//lib\screens\login_sign_up_screen.dart
+// lib/screens/login_sign_up_screen.dart
 import 'package:flutter/material.dart';
+import 'package:neuralboost/models/user.dart'; // Import the User model
 import 'package:neuralboost/screens/home_screen.dart';
 import 'package:neuralboost/screens/questionnaire_screen.dart';
 import 'package:neuralboost/services/auth_service.dart';
@@ -25,9 +26,14 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
       if (_isLogin) {
         isSuccess = await _authService.signInWithEmail(email, password);
         if (isSuccess) {
+          // Fetch the User object after successful login
+          User user = await _authService
+              .getCurrentUser(); // Replace with actual method to fetch user
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomeScreen(user: user)), // Pass the User object
           );
         }
       } else {
@@ -189,10 +195,14 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                           bool isLoggedIn =
                               await _authService.signInWithGoogle();
                           if (isLoggedIn) {
+                            // Fetch the User object after successful login
+                            User user = await _authService
+                                .getCurrentUser(); // Replace with actual method to fetch user
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
+                                  builder: (context) => HomeScreen(
+                                      user: user)), // Pass the User object
                             );
                           }
                         },
