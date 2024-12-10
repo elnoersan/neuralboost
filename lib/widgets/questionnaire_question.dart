@@ -14,57 +14,58 @@ class QuestionnaireQuestion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(question),
-        SizedBox(height: 8.0),
-        Row(
-          children: [
-            Expanded(
-              child: RadioListTile<String>(
-                title: Text('Never'),
-                value: 'Never',
-                groupValue: selectedAnswer,
-                onChanged: onChanged,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Question Text
+          Text(
+            question,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
             ),
-            Expanded(
-              child: RadioListTile<String>(
-                title: Text('Rarely'),
-                value: 'Rarely',
-                groupValue: selectedAnswer,
-                onChanged: onChanged,
-              ),
-            ),
-            Expanded(
-              child: RadioListTile<String>(
-                title: Text('Sometimes'),
-                value: 'Sometimes',
-                groupValue: selectedAnswer,
-                onChanged: onChanged,
-              ),
-            ),
-            Expanded(
-              child: RadioListTile<String>(
-                title: Text('Often'),
-                value: 'Often',
-                groupValue: selectedAnswer,
-                onChanged: onChanged,
-              ),
-            ),
-            Expanded(
-              child: RadioListTile<String>(
-                title: Text('Very Often'),
-                value: 'Very Often',
-                groupValue: selectedAnswer,
-                onChanged: onChanged,
-              ),
-            ),
-          ],
+          ),
+          SizedBox(height: 12.0),
+
+          // Radio Buttons for Answers
+          Column(
+            children: [
+              _buildRadioTile('Never'),
+              _buildRadioTile('Rarely'),
+              _buildRadioTile('Sometimes'),
+              _buildRadioTile('Often'),
+              _buildRadioTile('Very Often'),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper method to build individual RadioListTile
+  Widget _buildRadioTile(String value) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 4.0),
+      child: RadioListTile<String>(
+        title: Text(
+          value,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+          ),
         ),
-        SizedBox(height: 16.0),
-      ],
+        value: value,
+        groupValue: selectedAnswer,
+        onChanged: onChanged,
+        activeColor: Colors.blue,
+        tileColor: Colors.grey[200],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
     );
   }
 }
