@@ -1,3 +1,4 @@
+// lib/screens/profile_screen.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
   bool _hasADHD = false;
+  int _points = 0;
 
   @override
   void initState() {
@@ -26,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (snapshot.exists) {
       setState(() {
         _hasADHD = snapshot.child('hasADHD').value as bool;
+        _points = snapshot.child('points').value as int? ?? 0;
       });
     }
   }
@@ -36,22 +39,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: Text(
-                'Email: ${_auth.currentUser?.email ?? 'N/A'}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+            Text(
+              'Email: ${_auth.currentUser?.email ?? 'N/A'}',
+              style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 20),
-            Flexible(
-              child: Text(
-                'ADHD Status: ${_hasADHD ? 'Yes' : 'No'}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+            SizedBox(height: 10),
+            Text(
+              'Points: $_points',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'ADHD Status: ${_hasADHD ? 'Yes' : 'No'}',
+              style: TextStyle(fontSize: 18),
             ),
           ],
         ),

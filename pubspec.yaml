@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   font_awesome_flutter: ^10.8.0
   flip_card: ^0.7.0
+  sqflite: ^2.4.1
+  path: ^1.8.2
   
 
 dev_dependencies:

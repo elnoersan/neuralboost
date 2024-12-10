@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class GameButton extends StatelessWidget {
   final String label;
-  final Function() onPressed;
+  final VoidCallback onPressed;
 
   GameButton({required this.label, required this.onPressed});
 
@@ -12,6 +12,12 @@ class GameButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       child: Text(label),
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
     );
   }
 }
