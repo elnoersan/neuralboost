@@ -5,7 +5,10 @@ import 'package:neuralboost/screens/drawer_menu_screen.dart'; // Import DrawerMe
 import 'package:neuralboost/screens/meditation_game.dart';
 import 'package:neuralboost/screens/memorizer_number_game.dart';
 import 'package:neuralboost/screens/memory_card_game.dart';
+import 'package:neuralboost/screens/number_memory_screen.dart';
+import 'package:neuralboost/screens/sequence_memory_screen.dart';
 import 'package:neuralboost/screens/todo_list_menu.dart';
+import 'package:neuralboost/screens/visual_memory_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final User user; // Pass the User model as a parameter
@@ -117,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                 // Navigate to Memory Card Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MemoryCardGame()),
+                  MaterialPageRoute(builder: (context) => SequenceMemoryScreen()),
                 );
               },
             ),
@@ -133,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MemorizerNumberGame()),
+                      builder: (context) => NumberMemoryScreen()),
                 );
               },
             ),
@@ -148,7 +151,7 @@ class HomeScreen extends StatelessWidget {
                 // Navigate to Meditation Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MeditationGame()),
+                  MaterialPageRoute(builder: (context) => VisualMemoryScreen()),
                 );
               },
             ),
