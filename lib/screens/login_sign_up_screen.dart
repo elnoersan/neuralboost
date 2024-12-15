@@ -1,4 +1,3 @@
-// lib/screens/login_sign_up_screen.dart
 import 'package:flutter/material.dart';
 import 'package:neuralboost/models/user.dart'; // Import the User model
 import 'package:neuralboost/screens/home_screen.dart';
@@ -16,9 +15,14 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isLogin = true;
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   void _handleAuth() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
       String email = _emailController.text;
       String password = _passwordController.text;
 
@@ -27,13 +31,10 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
         isSuccess = await _authService.signInWithEmail(email, password);
         if (isSuccess) {
           // Fetch the User object after successful login
-          User user = await _authService
-              .getCurrentUser(); // Replace with actual method to fetch user
+          User user = await _authService.getCurrentUser();
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    HomeScreen(user: user)), // Pass the User object
+            MaterialPageRoute(builder: (context) => HomeScreen(user: user)),
           );
         }
       } else {
@@ -46,6 +47,10 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
           );
         }
       }
+
+      setState(() {
+        _isLoading = false;
+      });
 
       if (!isSuccess) {
         // Handle error
@@ -70,7 +75,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
     if (value == null || value.isEmpty) {
       return 'Please enter your email';
     }
-    if (!value.contains('@')) {
+    if (!value.contains('@') || !value.contains('.')) {
       return 'Please enter a valid email';
     }
     return null;
@@ -80,7 +85,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     }
-    if (value.length <= 6) {
+    if (value.length < 6) {
       return 'Password must be at least 6 characters';
     }
     return null;
@@ -153,20 +158,25 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     SizedBox(height: 20),
                     Flexible(
                       child: ElevatedButton(
-                        onPressed: _handleAuth,
+                        onPressed: _isLoading ? null : _handleAuth,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: Text(
-                          _isLogin ? 'Login' : 'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
+                        child: _isLoading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              )
+                            : Text(
+                                _isLogin ? 'Login' : 'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -191,21 +201,31 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     SizedBox(height: 20),
                     Flexible(
                       child: ElevatedButton(
-                        onPressed: () async {
-                          bool isLoggedIn =
-                              await _authService.signInWithGoogle();
-                          if (isLoggedIn) {
-                            // Fetch the User object after successful login
-                            User user = await _authService
-                                .getCurrentUser(); // Replace with actual method to fetch user
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen(
-                                      user: user)), // Pass the User object
-                            );
-                          }
-                        },
+                        onPressed: _isLoading
+                            ? null
+                            : () async {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+
+                                bool isLoggedIn =
+                                    await _authService.signInWithGoogle();
+                                if (isLoggedIn) {
+                                  // Fetch the User object after successful login
+                                  User user =
+                                      await _authService.getCurrentUser();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            HomeScreen(user: user)),
+                                  );
+                                }
+
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
@@ -216,7 +236,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Image.asset(
-                              'assets/images/icons/google.png', // Path to your Google logo image
+                              'assets/images/icons/google.png',
                               height: 24,
                               width: 24,
                             ),
