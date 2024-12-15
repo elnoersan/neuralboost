@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neuralboost/import/games/pages/patience_game/pages/game_page.dart';
 import 'package:neuralboost/models/user.dart'; // Import the User model
 import 'package:neuralboost/screens/drawer_menu_screen.dart'; // Import DrawerMenu
 import 'package:neuralboost/screens/todo_list_menu.dart';
@@ -143,13 +144,13 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: _buildGameBox(
               context: context,
-              icon: Icons.speed,
-              title: 'Meditation Game',
+              icon: Icons.spa,
+              title: 'Meditation Game for Patience',
               onTap: () {
                 // Navigate to Meditation Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ReactionTime()),
+                  MaterialPageRoute(builder: (context) => PatienceGamePage()),
                 );
               },
             ),

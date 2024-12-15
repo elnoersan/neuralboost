@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neuralboost/import/games/pages/sequence_memory/pages/game_page.dart';
