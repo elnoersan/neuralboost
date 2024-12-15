@@ -54,6 +54,7 @@ dev_dependencies:
   google_sign_in: ^6.2.2
   firebase_database: ^11.2.0 # Replace with the latest version
   flutter_login: ^5.0.0
+  google_sign_in_android: ^6.1.34
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

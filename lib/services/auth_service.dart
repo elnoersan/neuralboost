@@ -1,4 +1,5 @@
 // lib/services/auth_service.dart
+// TODO BETTER AUTH SERVICE MAKE IT PERMANENT OR EXPIRY
 import 'package:firebase_auth/firebase_auth.dart'
     as firebase_auth; // Use 'as' prefix for Firebase Auth
 import 'package:firebase_database/firebase_database.dart'; // Import Firebase Database
