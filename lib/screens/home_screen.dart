@@ -1,14 +1,11 @@
-// lib/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:neuralboost/models/user.dart'; // Import the User model
 import 'package:neuralboost/screens/drawer_menu_screen.dart'; // Import DrawerMenu
-import 'package:neuralboost/screens/meditation_game.dart';
-import 'package:neuralboost/screens/memorizer_number_game.dart';
-import 'package:neuralboost/screens/memory_card_game.dart';
-import 'package:neuralboost/screens/number_memory_screen.dart';
-import 'package:neuralboost/screens/sequence_memory_screen.dart';
 import 'package:neuralboost/screens/todo_list_menu.dart';
-import 'package:neuralboost/screens/visual_memory_screen.dart';
+
+import '../import/games/pages/numbers_memory/numbers_memory_page.dart';
+import '../import/games/pages/reaction_time/reaction_time_page.dart';
+import '../import/games/pages/sequence_memory/sequence_memory_page.dart';
 
 class HomeScreen extends StatelessWidget {
   final User user; // Pass the User model as a parameter
@@ -105,11 +102,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Mini-Games Section
+// Mini-Games Section
   Widget _buildMiniGamesSection(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Row(
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween, // Ensures space between items
         children: [
           Expanded(
             child: _buildGameBox(
@@ -120,12 +119,12 @@ class HomeScreen extends StatelessWidget {
                 // Navigate to Memory Card Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SequenceMemoryScreen()),
+                  MaterialPageRoute(builder: (context) => SequenceMemory()),
                 );
               },
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 10), // Adds spacing between the game boxes
           Expanded(
             child: _buildGameBox(
               context: context,
@@ -135,23 +134,22 @@ class HomeScreen extends StatelessWidget {
                 // Navigate to Memorizer Number Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => NumberMemoryScreen()),
+                  MaterialPageRoute(builder: (context) => NumbersMemory()),
                 );
               },
             ),
           ),
-          SizedBox(width: 10),
+          SizedBox(width: 10), // Adds spacing between the game boxes
           Expanded(
             child: _buildGameBox(
               context: context,
-              icon: Icons.spa,
+              icon: Icons.speed,
               title: 'Meditation Game',
               onTap: () {
                 // Navigate to Meditation Game
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => VisualMemoryScreen()),
+                  MaterialPageRoute(builder: (context) => ReactionTime()),
                 );
               },
             ),

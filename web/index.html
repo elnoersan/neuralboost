@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,12 +28,38 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>neuralboost</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
+  <!-- Firebase scripts -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBIQQh8NMXUI6vZorI1X8-dsX35TntRwUs",
+      authDomain: "pabdatabase.firebaseapp.com",
+      databaseURL: "https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "pabdatabase",
+      storageBucket: "pabdatabase.firebasestorage.app",
+      messagingSenderId: "708053224224",
+      appId: "1:708053224224:web:f0f1c3d948e0ece3b0a545",
+      measurementId: "G-NYFV53YNGE"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <!-- Load your Flutter app -->
   <script src="flutter_bootstrap.js" async></script>
 </body>
+
 </html>
