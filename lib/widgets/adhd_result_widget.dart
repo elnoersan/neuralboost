@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neuralboost/utils/app_theme.dart';
 
 class ADHDResultWidget extends StatelessWidget {
   final bool hasADHD;
@@ -28,7 +29,7 @@ class ADHDResultWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: AppTheme.primaryColor,
                 ),
               ),
               SizedBox(height: 20),
@@ -49,7 +50,7 @@ class ADHDResultWidget extends StatelessWidget {
               ElevatedButton(
                 onPressed: onContinue,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppTheme.primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -57,7 +58,7 @@ class ADHDResultWidget extends StatelessWidget {
                 child: Text(
                   'Continue',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppTheme.backgroundColor,
                     fontSize: 16,
                   ),
                 ),

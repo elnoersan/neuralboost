@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:neuralboost/import/games/pages/reaction_time/controller/reaction_timer_value_controller.dart';
+import 'reaction_timer_value_controller.dart';
 import '../../sequence_memory/pages/info_page.dart';
 import '../pages/green_page.dart';
 import '../pages/red_page.dart';

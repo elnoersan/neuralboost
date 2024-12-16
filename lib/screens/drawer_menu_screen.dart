@@ -1,12 +1,13 @@
-// lib/screens/drawer_menu_screen.dart
 import 'package:flutter/material.dart';
-import 'package:neuralboost/models/user.dart'; // Import the User model
-import 'package:neuralboost/screens/login_sign_up_screen.dart'; // Import LoginSignUpScreen
-import 'package:neuralboost/screens/profile_screen.dart';
-import 'package:neuralboost/screens/questionnaire_screen.dart'; // Import QuestionnaireScreen
-import 'package:neuralboost/screens/settings_screen.dart';
-import 'package:neuralboost/screens/shop_screen.dart';
-import 'package:neuralboost/services/auth_service.dart'; // Import AuthService
+
+import '../models/user.dart'; // Import the User model
+import '../services/auth_service.dart'; // Import AuthService
+import '../utils/app_theme.dart'; // Import the AppTheme
+import 'login_sign_up_screen.dart'; // Import LoginSignUpScreen
+import 'profile_screen.dart';
+import 'questionnaire_screen.dart'; // Import QuestionnaireScreen
+import 'settings_screen.dart';
+import 'shop_screen.dart';
 
 class DrawerMenu extends StatelessWidget {
   final User user; // Pass the User model as a parameter
@@ -23,7 +24,7 @@ class DrawerMenu extends StatelessWidget {
           // Drawer Header: Profile
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: AppTheme.primaryColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,23 +35,21 @@ class DrawerMenu extends StatelessWidget {
                   child: Icon(
                     Icons.person,
                     size: 40,
-                    color: Colors.blue,
+                    color: AppTheme.primaryColor,
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   user.email, // Display the user's email
-                  style: TextStyle(
+                  style: AppTheme.titleMedium.copyWith(
                     color: Colors.white,
-                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   'Points: ${user.points}', // Display the user's points
-                  style: TextStyle(
+                  style: AppTheme.bodySmall.copyWith(
                     color: Colors.white70,
-                    fontSize: 14,
                   ),
                 ),
               ],
@@ -87,18 +86,15 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.info),
             title: Text('ADHD Status'),
-            subtitle: Text(user.hasADHD
-                ? 'You may have ADHD'
-                : 'You likely do not have ADHD'),
+            subtitle: Text(user.adhdStatus),
             onTap: () {
               // Show a dialog with ADHD status
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text('ADHD Status'),
-                  content: Text(user.hasADHD
-                      ? 'Based on your responses, you may have ADHD.'
-                      : 'Based on your responses, you likely do not have ADHD.'),
+                  content: Text(
+                      'Based on your responses, your ADHD status is: ${user.adhdStatus}'),
                   actions: [
                     TextButton(
                       onPressed: () {

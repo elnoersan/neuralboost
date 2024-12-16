@@ -1,7 +1,7 @@
-//lib\widgets\questionnaire_question\questionnaire_question_b.dart
-
 import 'package:flutter/material.dart';
-import 'package:neuralboost/utils/constants.dart';
+import 'package:neuralboost/utils/app_theme.dart';
+
+import '../../utils/constants.dart';
 
 class QuestionnaireQuestionB extends StatelessWidget {
   final List<String?> responses;
@@ -16,79 +16,58 @@ class QuestionnaireQuestionB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text(
-              'Part B: Symptoms of Hyperactivity and Impulsivity',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: partBQuestions.length,
-                itemBuilder: (context, index) {
-                  return _buildQuestion(index, partBQuestions[index]);
-                },
-              ),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: onSubmit,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Text(
-                'Submit',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Part B: Symptoms of Hyperactivity and Impulsivity',
+          style: AppTheme.titleMedium,
         ),
-      ),
+        const SizedBox(height: 16),
+        Expanded(
+          child: ListView.builder(
+            itemCount: partBQuestions.length,
+            itemBuilder: (context, index) {
+              return _buildQuestionCard(index, partBQuestions[index]);
+            },
+          ),
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton(
+          onPressed: onSubmit,
+          style: AppTheme.elevatedButtonStyle,
+          child: const Text('Submit'),
+        ),
+      ],
     );
   }
 
-  Widget _buildQuestion(int index, String question) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            question,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
+  Widget _buildQuestionCard(int index, String question) {
+    return Card(
+      elevation: AppTheme.cardTheme.elevation,
+      shape: AppTheme.cardTheme.shape,
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              question,
+              style: AppTheme.bodyMedium,
             ),
-          ),
-          SizedBox(height: 12.0),
-          Column(
-            children: [
-              _buildRadioTile(index, 'Never'),
-              _buildRadioTile(index, 'Rarely'),
-              _buildRadioTile(index, 'Sometimes'),
-              _buildRadioTile(index, 'Often'),
-              _buildRadioTile(index, 'Very Often'),
-            ],
-          ),
-        ],
+            const SizedBox(height: 12.0),
+            Column(
+              children: [
+                _buildRadioTile(index, 'Never'),
+                _buildRadioTile(index, 'Rarely'),
+                _buildRadioTile(index, 'Sometimes'),
+                _buildRadioTile(index, 'Often'),
+                _buildRadioTile(index, 'Very Often'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -97,17 +76,14 @@ class QuestionnaireQuestionB extends StatelessWidget {
     return RadioListTile<String>(
       title: Text(
         value,
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.black,
-        ),
+        style: AppTheme.bodySmall,
       ),
       value: value,
       groupValue: responses[index],
       onChanged: (String? answer) {
         onChanged(index, answer);
       },
-      activeColor: Colors.blue,
+      activeColor: AppTheme.primaryColor,
       tileColor: Colors.grey[200],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),

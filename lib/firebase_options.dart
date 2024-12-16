@@ -46,7 +46,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '708053224224',
     projectId: 'pabdatabase',
     authDomain: 'pabdatabase.firebaseapp.com',
-    databaseURL: 'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pabdatabase.firebasestorage.app',
   );
 
@@ -55,7 +56,8 @@ class DefaultFirebaseOptions {
     appId: '1:708053224224:android:a633d3bbe043ad7cb0a545',
     messagingSenderId: '708053224224',
     projectId: 'pabdatabase',
-    databaseURL: 'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pabdatabase.firebasestorage.app',
   );
 
@@ -64,7 +66,8 @@ class DefaultFirebaseOptions {
     appId: '1:708053224224:ios:e6fdcc43873b78abb0a545',
     messagingSenderId: '708053224224',
     projectId: 'pabdatabase',
-    databaseURL: 'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pabdatabase.firebasestorage.app',
     iosBundleId: 'com.ntr.neuralboost',
   );
@@ -74,7 +77,8 @@ class DefaultFirebaseOptions {
     appId: '1:708053224224:ios:e6fdcc43873b78abb0a545',
     messagingSenderId: '708053224224',
     projectId: 'pabdatabase',
-    databaseURL: 'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pabdatabase.firebasestorage.app',
     iosBundleId: 'com.ntr.neuralboost',
   );
@@ -85,8 +89,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '708053224224',
     projectId: 'pabdatabase',
     authDomain: 'pabdatabase.firebaseapp.com',
-    databaseURL: 'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://pabdatabase-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'pabdatabase.firebasestorage.app',
   );
-
 }
