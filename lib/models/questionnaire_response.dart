@@ -2,19 +2,19 @@
 class QuestionnaireResponse {
   List<String> partAResponses;
   List<String> partBResponses;
-  bool hasADHD;
+  String adhdStatus; // Updated to store the ADHD status as a string
 
   QuestionnaireResponse({
     required this.partAResponses,
     required this.partBResponses,
-    required this.hasADHD,
+    required this.adhdStatus,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'partAResponses': partAResponses,
       'partBResponses': partBResponses,
-      'hasADHD': hasADHD,
+      'adhdStatus': adhdStatus,
     };
   }
 }

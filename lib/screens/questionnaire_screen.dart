@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:neuralboost/models/user.dart'; // Import the User model
-import 'package:neuralboost/screens/home_screen.dart'; // Import HomeScreen
-import 'package:neuralboost/services/auth_service.dart'; // Import AuthService
-import 'package:neuralboost/services/questionnaire_service.dart';
-import 'package:neuralboost/utils/constants.dart';
-import 'package:neuralboost/widgets/adhd_result_widget.dart'; // Import the new widget
-import 'package:neuralboost/widgets/questionnaire_question/questionnaire_question_a.dart'; // Import Part A widget
-import 'package:neuralboost/widgets/questionnaire_question/questionnaire_question_b.dart'; // Import Part B widget
+import 'package:neuralboost/utils/app_theme.dart';
+import '../models/user.dart'; // Import the User model
+import '../services/auth_service.dart'; // Import AuthService
+import '../services/questionnaire_service.dart';
+import '../utils/constants.dart';
+import '../widgets/questionnaire_question/questionnaire_question_a.dart'; // Import Part A widget
+import '../widgets/questionnaire_question/questionnaire_question_b.dart'; // Import Part B widget
+import 'home_screen.dart'; // Import HomeScreen
 
 class QuestionnaireScreen extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
   List<String?> _partBResponses = List.filled(partBQuestions.length, null);
   bool _showPartB = false; // Flag to show Part B
   bool _showResult = false; // Flag to show the result widget
-  bool _hasADHD = false; // Result of the questionnaire
+  String _adhdStatus = ''; // Result of the questionnaire
 
   void _saveResponses() async {
     print('Saving responses...');
@@ -34,12 +34,44 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
     print('Responses saved successfully.');
 
     // Calculate ADHD result (based on Part A responses)
-    _hasADHD = _service.calculateADHDStatus(partAResponses);
+    _adhdStatus = _service.calculateADHDStatus(partAResponses);
 
-    // Show the result widget
-    setState(() {
-      _showResult = true;
-    });
+    // Show the result dialog
+    _showResultDialog();
+  }
+
+  void _showResultDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'ADHD Result',
+            style: AppTheme.titleMedium,
+          ),
+          content: Text(
+            _adhdStatus == 'Likely ADHD'
+                ? 'You likely have ADHD. Please consult a mental health professional for a full evaluation.'
+                : _adhdStatus == 'Possible ADHD'
+                    ? 'You may have ADHD. Please consult a mental health professional for a full evaluation.'
+                    : 'You likely do not have ADHD.',
+            style: AppTheme.bodyMedium,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _navigateToHomeScreen();
+              },
+              child: Text(
+                'Continue',
+                style: TextStyle(color: AppTheme.primaryColor),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   // Mark the method as async to use await
@@ -58,47 +90,48 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: AppTheme.primaryColor,
         elevation: 0,
         title: Text(
           'ADHD Questionnaire',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          style: AppTheme.headlineSmall.copyWith(color: Colors.white),
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
-        color: Colors.blue,
+        padding: const EdgeInsets.all(16.0),
+        color: AppTheme.backgroundColor,
         child: Center(
-          child: _showResult
-              ? ADHDResultWidget(
-                  hasADHD: _hasADHD,
-                  onContinue: _navigateToHomeScreen, // Use the async method
-                )
-              : _showPartB
-                  ? QuestionnaireQuestionB(
-                      responses: _partBResponses,
-                      onChanged: (int index, String? answer) {
-                        setState(() {
-                          _partBResponses[index] = answer;
-                        });
-                      },
-                      onSubmit: _saveResponses,
-                    )
-                  : QuestionnaireQuestionA(
-                      responses: _partAResponses,
-                      onChanged: (int index, String? answer) {
-                        setState(() {
-                          _partAResponses[index] = answer;
-                        });
-                      },
-                      onNext: () {
-                        setState(() {
-                          _showPartB = true; // Move to Part B
-                        });
-                      },
-                    ),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            transitionBuilder: (child, animation) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+            child: _showResult
+                ? Container() // Empty container since result is shown in AlertDialog
+                : _showPartB
+                    ? QuestionnaireQuestionB(
+                        responses: _partBResponses,
+                        onChanged: (int index, String? answer) {
+                          setState(() {
+                            _partBResponses[index] = answer;
+                          });
+                        },
+                        onSubmit: _saveResponses,
+                      )
+                    : QuestionnaireQuestionA(
+                        responses: _partAResponses,
+                        onChanged: (int index, String? answer) {
+                          setState(() {
+                            _partAResponses[index] = answer;
+                          });
+                        },
+                        onNext: () {
+                          setState(() {
+                            _showPartB = true; // Move to Part B
+                          });
+                        },
+                      ),
+          ),
         ),
       ),
     );

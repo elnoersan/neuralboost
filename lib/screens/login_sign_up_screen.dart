@@ -3,6 +3,7 @@ import 'package:neuralboost/models/user.dart'; // Import the User model
 import 'package:neuralboost/screens/home_screen.dart';
 import 'package:neuralboost/screens/questionnaire_screen.dart';
 import 'package:neuralboost/services/auth_service.dart';
+import 'package:neuralboost/utils/app_theme.dart'; // Import the custom theme
 
 class LoginSignUpScreen extends StatefulWidget {
   @override
@@ -95,12 +96,12 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: AppTheme.primaryColor,
         elevation: 0,
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
-        color: Colors.blue,
+        color: AppTheme.primaryColor,
         child: Center(
           child: Card(
             elevation: 8,
@@ -117,10 +118,8 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     Flexible(
                       child: Text(
                         'Neural Boost',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                        style: AppTheme.headlineSmall.copyWith(
+                          color: AppTheme.primaryColor,
                         ),
                       ),
                     ),
@@ -134,7 +133,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
-                          fillColor: Colors.grey[200],
+                          fillColor: AppTheme.scaffoldBackgroundColor,
                         ),
                         validator: _validateEmail,
                       ),
@@ -150,7 +149,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           filled: true,
-                          fillColor: Colors.grey[200],
+                          fillColor: AppTheme.scaffoldBackgroundColor,
                         ),
                         validator: _validatePassword,
                       ),
@@ -159,12 +158,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                     Flexible(
                       child: ElevatedButton(
                         onPressed: _isLoading ? null : _handleAuth,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
+                        style: AppTheme.elevatedButtonStyle,
                         child: _isLoading
                             ? CircularProgressIndicator(
                                 valueColor:
@@ -192,7 +186,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                               ? 'Don’t have an account? Register here'
                               : 'Already have an account? Sign in',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: AppTheme.primaryColor,
                             fontSize: 14,
                           ),
                         ),
@@ -227,7 +221,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                                 });
                               },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor: AppTheme.scaffoldBackgroundColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -245,7 +239,7 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                               child: Text(
                                 'Continue with Google',
                                 style: TextStyle(
-                                  color: Colors.black,
+                                  color: AppTheme.textColor,
                                   fontSize: 16,
                                 ),
                               ),

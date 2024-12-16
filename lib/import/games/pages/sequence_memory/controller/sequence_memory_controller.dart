@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:neuralboost/import/games/pages/sequence_memory/pages/game_page.dart';
-import 'package:neuralboost/import/games/pages/sequence_memory/pages/info_page.dart';
-import 'package:neuralboost/import/games/pages/sequence_memory/pages/wrong_answer_page.dart';
+import '../pages/game_page.dart';
+import '../pages/info_page.dart';
+import '../pages/wrong_answer_page.dart';
 import '../../../helpers/colors.dart';
 import 'sequence_memory_value_controller.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:neuralboost/import/games/pages/patience_game/pages/game_page.dart';
-import 'package:neuralboost/models/user.dart'; // Import the User model
-import 'package:neuralboost/screens/drawer_menu_screen.dart'; // Import DrawerMenu
-import 'package:neuralboost/screens/todo_list_menu.dart';
 
 import '../import/games/pages/numbers_memory/numbers_memory_page.dart';
-import '../import/games/pages/reaction_time/reaction_time_page.dart';
+import '../import/games/pages/patience_game/pages/game_page.dart';
 import '../import/games/pages/sequence_memory/sequence_memory_page.dart';
+import '../models/user.dart'; // Import the User model
+import '../utils/app_theme.dart';
+import 'drawer_menu_screen.dart'; // Import DrawerMenu
+import 'todo_list_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   final User user; // Pass the User model as a parameter
@@ -19,33 +19,33 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'NeuralBoost',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+          style: AppTheme.headlineSmall.copyWith(
             color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: AppTheme.primaryColor,
         elevation: 0,
       ),
       drawer: DrawerMenu(user: user), // Pass the User model to DrawerMenu
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Header Section: Progress Tracker
-            _buildHeaderSection(),
+            _buildHeaderSection(context),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Mini-Games Section
-            _buildSectionTitle('Mini-Games'),
+            _buildSectionTitle(context, 'Mini-Games'),
             _buildMiniGamesSection(context),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // To-Do List Section
-            _buildSectionTitle('To-Do List'),
+            _buildSectionTitle(context, 'To-Do List'),
             _buildTodoListSection(context),
           ],
         ),
@@ -54,11 +54,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Header Section: Progress Tracker
-  Widget _buildHeaderSection() {
+  Widget _buildHeaderSection(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: AppTheme.primaryColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -66,23 +66,22 @@ class HomeScreen extends StatelessWidget {
         children: [
           Text(
             'Your Progress',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            style: AppTheme.titleMedium.copyWith(
               color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           LinearProgressIndicator(
-            value: 0.6, // Example progress value
+            value: 0.7, // Example progress value
             backgroundColor: Colors.white.withOpacity(0.3),
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+            valueColor:
+                const AlwaysStoppedAnimation<Color>(AppTheme.accentColor),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
-            '60% Focus Improved',
-            style: TextStyle(
-              fontSize: 16,
+            '70% Focus Improved',
+            style: AppTheme.bodyMedium.copyWith(
               color: Colors.white,
             ),
           ),
@@ -92,68 +91,77 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Section Title
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: TextStyle(
-        fontSize: 20,
+      style: AppTheme.titleMedium.copyWith(
         fontWeight: FontWeight.bold,
-        color: Colors.blue,
+        color: AppTheme.primaryColor,
       ),
     );
   }
 
-// Mini-Games Section
+  // Mini-Games Section
+  // Mini-Games Section
   Widget _buildMiniGamesSection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceBetween, // Ensures space between items
+      margin: const EdgeInsets.only(top: 10),
+      child: Column(
         children: [
-          Expanded(
-            child: _buildGameBox(
-              context: context,
-              icon: Icons.games,
-              title: 'Memory Card Game',
-              onTap: () {
-                // Navigate to Memory Card Game
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SequenceMemory()),
-                );
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: _buildGameBox(
+                  context: context,
+                  icon: Icons.games,
+                  title: 'Memory Card Game',
+                  onTap: () {
+                    // Navigate to Memory Card Game
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SequenceMemory()),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _buildGameBox(
+                  context: context,
+                  icon: Icons.psychology,
+                  title: 'Memorizer Number Game',
+                  onTap: () {
+                    // Navigate to Memorizer Number Game
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NumbersMemory()),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 10), // Adds spacing between the game boxes
-          Expanded(
-            child: _buildGameBox(
-              context: context,
-              icon: Icons.psychology,
-              title: 'Memorizer Number Game',
-              onTap: () {
-                // Navigate to Memorizer Number Game
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NumbersMemory()),
-                );
-              },
-            ),
-          ),
-          SizedBox(width: 10), // Adds spacing between the game boxes
-          Expanded(
-            child: _buildGameBox(
-              context: context,
-              icon: Icons.spa,
-              title: 'Meditation Game for Patience',
-              onTap: () {
-                // Navigate to Meditation Game
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PatienceGamePage()),
-                );
-              },
-            ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: _buildGameBox(
+                  context: context,
+                  icon: Icons.spa,
+                  title: 'Meditation Game for Patience',
+                  onTap: () {
+                    // Navigate to Meditation Game
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PatienceGamePage()),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -163,7 +171,7 @@ class HomeScreen extends StatelessWidget {
   // To-Do List Section
   Widget _buildTodoListSection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: const EdgeInsets.only(top: 10),
       child: _buildCard(
         context: context,
         icon: Icons.list,
@@ -202,15 +210,14 @@ class HomeScreen extends StatelessWidget {
               Icon(
                 icon,
                 size: 48,
-                color: Colors.blue,
+                color: AppTheme.primaryColor,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: 16,
+                style: AppTheme.bodyMedium.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: AppTheme.textColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -244,23 +251,21 @@ class HomeScreen extends StatelessWidget {
               Icon(
                 icon,
                 size: 32,
-                color: Colors.blue,
+                color: AppTheme.primaryColor,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 title,
-                style: TextStyle(
-                  fontSize: 18,
+                style: AppTheme.titleMedium.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: AppTheme.textColor,
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               Text(
                 subtitle,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey[600],
+                style: AppTheme.bodySmall.copyWith(
+                  color: AppTheme.lightTextColor,
                 ),
               ),
             ],
