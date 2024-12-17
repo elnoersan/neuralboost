@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../helpers/colors.dart';
 import '../../../helpers/phone_properties.dart';
 import '../../../widgets/text/less_futured_text.dart';
@@ -55,7 +56,6 @@ class _ShowMsPageState extends State<ShowMsPage> {
         onPressed: () => controller.selectRedPage(),
         child: LessText.lessFuturedText(
           text: buttonText,
-          fontFamily: 'GemunuLibre',
           color: Colors.white,
         ),
         style: ElevatedButton.styleFrom(
@@ -82,7 +82,6 @@ class _ShowMsPageState extends State<ShowMsPage> {
           child: LessText.lessFuturedText(
             text: ms + " ms",
             fontSize: 30,
-            fontFamily: 'GemunuLibre',
             color: Colors.white,
           ),
         ),
@@ -93,7 +92,6 @@ class _ShowMsPageState extends State<ShowMsPage> {
         SizedBox(height: 15),
         LessText.lessFuturedText(
           text: "${controller.valueController.levelCount}/5",
-          fontFamily: 'GemunuLibre',
           fontSize: 20,
           color: Colors.white,
         ),
@@ -110,7 +108,6 @@ class _ShowMsPageState extends State<ShowMsPage> {
           child: FittedBox(
             child: LessText.lessFuturedText(
               text: "Average Score: $averageScore ms",
-              fontFamily: 'GemunuLibre',
               fontSize: 35,
               color: Colors.white,
             ),

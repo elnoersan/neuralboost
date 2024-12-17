@@ -61,7 +61,6 @@ class _RedPageState extends State<RedPage> {
         fontSize: 50,
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontFamily: 'GemunuLibre',
       ),
     );
   }

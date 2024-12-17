@@ -35,7 +35,11 @@ class _NumbersMemoryState extends State<NumbersMemory> {
     return FocusDetector(
       onFocusLost: () => _focusLostController(),
       child: Obx(
-        () => controller.pages[controller.page.value],
+        () => Scaffold(
+          body: Center(
+            child: controller.pages[controller.page.value],
+          ),
+        ),
       ),
     );
   }

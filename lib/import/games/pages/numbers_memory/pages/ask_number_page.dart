@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../helpers/colors.dart';
 import '../../../helpers/phone_properties.dart';
 import '../controllers/number_memory_value_controller.dart';
@@ -49,7 +50,6 @@ class _AskNumberState extends State<AskNumber> {
       "What was the number?",
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'GemunuLibre',
         color: Colors.white,
         fontSize: 25,
       ),
@@ -85,7 +85,7 @@ class _AskNumberState extends State<AskNumber> {
   Widget _submitButton() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(Phone.width(context) / 3, 40),
+        fixedSize: Size(Phone.width(context) / 2, 40),
         backgroundColor: Color.fromRGBO(244, 180, 0, 1),
       ),
       onPressed: () => submit(),

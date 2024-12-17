@@ -5,7 +5,6 @@ import '../../../helpers/colors.dart';
 import '../../../helpers/phone_properties.dart';
 import '../controllers/numbers_memory_controller.dart';
 
-
 class HintPage extends StatefulWidget {
   HintPage({Key? key}) : super(key: key);
 
@@ -48,7 +47,6 @@ class _HintPageState extends State<HintPage> {
             "Numbers Memory",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontFamily: 'GemunuLibre',
               color: Colors.white,
               fontSize: 35,
             ),
@@ -58,7 +56,6 @@ class _HintPageState extends State<HintPage> {
             "The humans are remember average 7 numbers.",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontFamily: 'GemunuLibre',
               color: Colors.white,
               fontSize: 25,
             ),

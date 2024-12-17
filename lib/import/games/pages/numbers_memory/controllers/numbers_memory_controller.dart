@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:neuralboost/import/games/pages/numbers_memory/pages/results_pages/wrong_answer_page.dart';
 
-import '../../sequence_memory/pages/wrong_answer_page.dart';
 import '../pages/ask_number_page.dart';
 import '../pages/hint_page.dart';
 import '../pages/results_pages/correct_answer_page.dart';

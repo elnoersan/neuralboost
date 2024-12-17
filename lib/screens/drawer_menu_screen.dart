@@ -31,7 +31,7 @@ class DrawerMenu extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.white,
+                  backgroundColor: AppTheme.backgroundColor,
                   child: Icon(
                     Icons.person,
                     size: 40,
@@ -42,14 +42,14 @@ class DrawerMenu extends StatelessWidget {
                 Text(
                   user.email, // Display the user's email
                   style: AppTheme.titleMedium.copyWith(
-                    color: Colors.white,
+                    color: AppTheme.backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   'Points: ${user.points}', // Display the user's points
                   style: AppTheme.bodySmall.copyWith(
-                    color: Colors.white70,
+                    color: AppTheme.backgroundColor.withOpacity(0.3),
                   ),
                 ),
               ],
@@ -72,7 +72,7 @@ class DrawerMenu extends StatelessWidget {
           // Shop Section
           ListTile(
             leading: Icon(Icons.shopping_cart),
-            title: Text('Shop'),
+            title: Text('Exchange Your Coins'),
             onTap: () {
               // Navigate to Shop Screen
               Navigator.push(
@@ -86,15 +86,27 @@ class DrawerMenu extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.info),
             title: Text('ADHD Status'),
-            subtitle: Text(user.adhdStatus),
+            subtitle: Text(
+                'Last updated: ${user.dateResponded != null ? user.dateResponded!.toLocal().toString().split(' ')[0] : 'Not available'}'), // Display the dateResponded
             onTap: () {
               // Show a dialog with ADHD status
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text('ADHD Status'),
-                  content: Text(
-                      'Based on your responses, your ADHD status is: ${user.adhdStatus}'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'Based on your responses, your ADHD status is: ${user.adhdStatus}'),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Last updated: ${user.dateResponded != null ? user.dateResponded!.toLocal().toString().split(' ')[0] : 'Not available'}',
+                        style: AppTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -139,13 +151,30 @@ class DrawerMenu extends StatelessWidget {
             leading: Icon(Icons.info),
             title: Text('About'),
             onTap: () {
-              // Show a simple About dialog
+              // Show a simple About dialog with a disclaimer
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
                   title: Text('About NeuralBoost'),
-                  content: Text(
-                      'NeuralBoost is a focus and productivity app designed to help users improve their attention and manage tasks effectively.'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'NeuralBoost is a focus and productivity app designed to help users improve their attention and manage tasks effectively.'),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Disclaimer:',
+                        style: AppTheme.titleSmall.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'The results from the ADHD questionnaire are not a diagnosis. They are intended for informational purposes only. If you suspect you have ADHD, please consult a licensed mental health professional for a proper evaluation.',
+                        style: AppTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () {

@@ -72,7 +72,6 @@ class _TooSoonPageState extends State<TooSoonPage> {
         FittedBox(
           child: LessText.lessFuturedText(
             text: 'Click to try again',
-            fontFamily: 'GemunuLibre',
             color: Colors.white,
             fontWeight: FontWeight.normal,
             fontSize: 25,

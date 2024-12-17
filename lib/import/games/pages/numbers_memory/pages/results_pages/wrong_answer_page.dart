@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../helpers/colors.dart';
 import '../../../../helpers/phone_properties.dart';
 import '../../../../widgets/text/less_futured_text.dart';

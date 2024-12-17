@@ -35,6 +35,12 @@ class AppTheme {
     color: textColor,
   );
 
+  static const TextStyle titleSmall = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: textColor,
+  );
+
   // Define button styles
   static final ButtonStyle elevatedButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: primaryColor,
@@ -111,6 +117,7 @@ class AppTheme {
       bodyMedium: bodyMedium,
       bodySmall: bodySmall,
       titleMedium: titleMedium,
+      titleSmall: titleSmall, // Ensure titleSmall is included
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(style: elevatedButtonStyle),
     outlinedButtonTheme: OutlinedButtonThemeData(style: outlinedButtonStyle),

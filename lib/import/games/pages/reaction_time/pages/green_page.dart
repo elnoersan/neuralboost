@@ -36,7 +36,7 @@ class _GreenPageState extends State<GreenPage> {
                   fontSize: 70,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'GemunuLibre',
+                  
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:neuralboost/utils/app_theme.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -11,7 +12,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
-        backgroundColor: Colors.blue[700],
+        backgroundColor: AppTheme.primaryColor,
+        foregroundColor: AppTheme.backgroundColor,
         elevation: 4,
       ),
       body: SingleChildScrollView(
@@ -121,7 +123,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.blue[900],
+          color: AppTheme.primaryColor,
         ),
       ),
     );
@@ -141,18 +143,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: ListTile(
         leading: Icon(
           icon,
-          color: Colors.blue[700],
+          color: AppTheme.primaryColor,
         ),
         title: Text(
           title,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.blue[900],
+            color: AppTheme.primaryColor,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color: Colors.blue[700],
+          color: AppTheme.primaryColor,
         ),
         onTap: onTap,
       ),

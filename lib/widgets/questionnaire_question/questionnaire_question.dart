@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:neuralboost/utils/app_theme.dart';
-
 import '../../utils/constants.dart';
 
-class QuestionnaireQuestionB extends StatelessWidget {
+class QuestionnaireQuestion extends StatelessWidget {
   final List<String?> responses;
   final Function(int, String?) onChanged;
   final VoidCallback onSubmit;
 
-  QuestionnaireQuestionB({
+  QuestionnaireQuestion({
     required this.responses,
     required this.onChanged,
     required this.onSubmit,
@@ -20,15 +19,15 @@ class QuestionnaireQuestionB extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Part B: Symptoms of Hyperactivity and Impulsivity',
+          'ADHD Questionnaire',
           style: AppTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         Expanded(
           child: ListView.builder(
-            itemCount: partBQuestions.length,
+            itemCount: allQuestions.length,
             itemBuilder: (context, index) {
-              return _buildQuestionCard(index, partBQuestions[index]);
+              return _buildQuestionCard(index, allQuestions[index]);
             },
           ),
         ),
@@ -59,11 +58,26 @@ class QuestionnaireQuestionB extends StatelessWidget {
             const SizedBox(height: 12.0),
             Column(
               children: [
-                _buildRadioTile(index, 'Never'),
-                _buildRadioTile(index, 'Rarely'),
-                _buildRadioTile(index, 'Sometimes'),
-                _buildRadioTile(index, 'Often'),
-                _buildRadioTile(index, 'Very Often'),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: _buildRadioTile(index, 'Never'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: _buildRadioTile(index, 'Rarely'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: _buildRadioTile(index, 'Sometimes'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: _buildRadioTile(index, 'Often'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: _buildRadioTile(index, 'Very Often'),
+                ),
               ],
             ),
           ],
