@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
 import '../../../helpers/colors.dart';
 import '../../../helpers/phone_properties.dart';
 import '../../../helpers/timer.dart';
 import '../controllers/numbers_memory_controller.dart';
-
 
 class ShowNumber extends StatefulWidget {
   ShowNumber({Key? key}) : super(key: key);
@@ -45,7 +45,6 @@ class _ShowNumberState extends State<ShowNumber> {
             Text(
               c.valueController.number,
               style: TextStyle(
-                fontFamily: 'GemunuLibre',
                 color: Colors.white,
                 fontSize: 35,
               ),

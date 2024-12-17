@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:neuralboost/utils/app_theme.dart';
+
 import '../models/user.dart'; // Import the User model
 import '../services/auth_service.dart'; // Import AuthService
 import '../services/questionnaire_service.dart';
 import '../utils/constants.dart';
-import '../widgets/questionnaire_question/questionnaire_question_a.dart'; // Import Part A widget
-import '../widgets/questionnaire_question/questionnaire_question_b.dart'; // Import Part B widget
+import '../widgets/questionnaire_question/questionnaire_question.dart'; // Import the merged widget
 import 'home_screen.dart'; // Import HomeScreen
 
 class QuestionnaireScreen extends StatefulWidget {
@@ -16,9 +16,7 @@ class QuestionnaireScreen extends StatefulWidget {
 class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
   final QuestionnaireService _service = QuestionnaireService();
   final AuthService _authService = AuthService(); // Add AuthService
-  List<String?> _partAResponses = List.filled(partAQuestions.length, null);
-  List<String?> _partBResponses = List.filled(partBQuestions.length, null);
-  bool _showPartB = false; // Flag to show Part B
+  List<String?> _responses = List.filled(allQuestions.length, null);
   bool _showResult = false; // Flag to show the result widget
   String _adhdStatus = ''; // Result of the questionnaire
 
@@ -26,15 +24,15 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
     print('Saving responses...');
 
     // Convert responses to non-nullable lists
-    List<String> partAResponses = _partAResponses.whereType<String>().toList();
-    List<String> partBResponses = _partBResponses.whereType<String>().toList();
+    List<String> responses = _responses.whereType<String>().toList();
 
     // Save responses and calculate ADHD status
-    await _service.saveResponses(partAResponses, partBResponses);
+    await _service.saveResponses(
+        responses, DateTime.now()); // Pass both responses and dateResponded
     print('Responses saved successfully.');
 
-    // Calculate ADHD result (based on Part A responses)
-    _adhdStatus = _service.calculateADHDStatus(partAResponses);
+    // Calculate ADHD result (based on all responses)
+    _adhdStatus = _service.calculateADHDStatus(responses);
 
     // Show the result dialog
     _showResultDialog();
@@ -54,7 +52,9 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
                 ? 'You likely have ADHD. Please consult a mental health professional for a full evaluation.'
                 : _adhdStatus == 'Possible ADHD'
                     ? 'You may have ADHD. Please consult a mental health professional for a full evaluation.'
-                    : 'You likely do not have ADHD.',
+                    : _adhdStatus == 'Possibly from stress or overwhelm'
+                        ? 'Your symptoms may be related to stress or feeling overwhelmed. Consider managing stress and seeking support if needed.'
+                        : 'You likely do not have ADHD. However, if you continue to experience symptoms, consider consulting a mental health professional.',
             style: AppTheme.bodyMedium,
           ),
           actions: [
@@ -94,7 +94,8 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
         elevation: 0,
         title: Text(
           'ADHD Questionnaire',
-          style: AppTheme.headlineSmall.copyWith(color: Colors.white),
+          style:
+              AppTheme.headlineSmall.copyWith(color: AppTheme.backgroundColor),
         ),
       ),
       body: Container(
@@ -108,29 +109,15 @@ class _QuestionnaireScreenState extends State<QuestionnaireScreen> {
             },
             child: _showResult
                 ? Container() // Empty container since result is shown in AlertDialog
-                : _showPartB
-                    ? QuestionnaireQuestionB(
-                        responses: _partBResponses,
-                        onChanged: (int index, String? answer) {
-                          setState(() {
-                            _partBResponses[index] = answer;
-                          });
-                        },
-                        onSubmit: _saveResponses,
-                      )
-                    : QuestionnaireQuestionA(
-                        responses: _partAResponses,
-                        onChanged: (int index, String? answer) {
-                          setState(() {
-                            _partAResponses[index] = answer;
-                          });
-                        },
-                        onNext: () {
-                          setState(() {
-                            _showPartB = true; // Move to Part B
-                          });
-                        },
-                      ),
+                : QuestionnaireQuestion(
+                    responses: _responses,
+                    onChanged: (int index, String? answer) {
+                      setState(() {
+                        _responses[index] = answer;
+                      });
+                    },
+                    onSubmit: _saveResponses,
+                  ),
           ),
         ),
       ),

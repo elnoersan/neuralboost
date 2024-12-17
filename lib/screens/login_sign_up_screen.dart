@@ -161,13 +161,13 @@ class _LoginSignUpScreenState extends State<LoginSignUpScreen> {
                         style: AppTheme.elevatedButtonStyle,
                         child: _isLoading
                             ? CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppTheme.backgroundColor),
                               )
                             : Text(
                                 _isLogin ? 'Login' : 'Sign Up',
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppTheme.backgroundColor,
                                   fontSize: 16,
                                 ),
                               ),

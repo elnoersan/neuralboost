@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:neuralboost/screens/login_sign_up_screen.dart';
 
 import '../models/user.dart';
 import '../services/auth_service.dart';
@@ -39,9 +40,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ElevatedButton(
               child: const Text('Logout'),
               onPressed: () async {
+                // Sign out the user
                 await _authService.signOut();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', (Route<dynamic> route) => false);
+                // Navigate to the LoginSignUpScreen after logout
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginSignUpScreen()),
+                );
               },
             ),
           ],

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'reaction_timer_value_controller.dart';
-import '../../sequence_memory/pages/info_page.dart';
+
+import '../../reaction_time/pages/info_page.dart';
 import '../pages/green_page.dart';
 import '../pages/red_page.dart';
 import '../pages/show_ms_page.dart';
 import '../pages/too_soon_page.dart';
+import 'reaction_timer_value_controller.dart';
 
 class ReactionTimeController extends GetxController {
   ReactionTimeValueController get valueController =>

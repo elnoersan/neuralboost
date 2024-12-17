@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:neuralboost/import/games/pages/reaction_time/reaction_time_page.dart';
+import 'package:neuralboost/screens/todo_list_screen.dart';
 
 import '../import/games/pages/numbers_memory/numbers_memory_page.dart';
-import '../import/games/pages/patience_game/pages/game_page.dart';
 import '../import/games/pages/sequence_memory/sequence_memory_page.dart';
 import '../models/user.dart'; // Import the User model
 import '../utils/app_theme.dart';
 import 'drawer_menu_screen.dart'; // Import DrawerMenu
-import 'todo_list_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   final User user; // Pass the User model as a parameter
@@ -18,9 +18,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'NeuralBoost',
+          'Neural Boost',
           style: AppTheme.headlineSmall.copyWith(
-            color: Colors.white,
+            color: AppTheme.backgroundColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -67,14 +67,14 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Your Progress',
             style: AppTheme.titleMedium.copyWith(
-              color: Colors.white,
+              color: AppTheme.backgroundColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 10),
           LinearProgressIndicator(
             value: 0.7, // Example progress value
-            backgroundColor: Colors.white.withOpacity(0.3),
+            backgroundColor: AppTheme.backgroundColor.withOpacity(0.3),
             valueColor:
                 const AlwaysStoppedAnimation<Color>(AppTheme.accentColor),
           ),
@@ -102,7 +102,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   // Mini-Games Section
-  // Mini-Games Section
   Widget _buildMiniGamesSection(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
@@ -114,8 +113,8 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: _buildGameBox(
                   context: context,
-                  icon: Icons.games,
-                  title: 'Memory Card Game',
+                  icon: Icons.now_widgets,
+                  title: 'Sequence Memory',
                   onTap: () {
                     // Navigate to Memory Card Game
                     Navigator.push(
@@ -129,8 +128,8 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: _buildGameBox(
                   context: context,
-                  icon: Icons.psychology,
-                  title: 'Memorizer Number Game',
+                  icon: Icons.numbers,
+                  title: 'Number Memory',
                   onTap: () {
                     // Navigate to Memorizer Number Game
                     Navigator.push(
@@ -149,14 +148,13 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: _buildGameBox(
                   context: context,
-                  icon: Icons.spa,
-                  title: 'Meditation Game for Patience',
+                  icon: Icons.speed,
+                  title: 'Reaction Time',
                   onTap: () {
                     // Navigate to Meditation Game
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => PatienceGamePage()),
+                      MaterialPageRoute(builder: (context) => ReactionTime()),
                     );
                   },
                 ),

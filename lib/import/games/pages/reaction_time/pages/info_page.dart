@@ -55,7 +55,6 @@ class _InfoPageState extends State<InfoPage> {
                 fontSize: 30,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'GemunuLibre',
               ),
               textAlign: TextAlign.center,
             ),
@@ -65,7 +64,6 @@ class _InfoPageState extends State<InfoPage> {
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
-                fontFamily: 'GemunuLibre',
               ),
             ),
           ],
