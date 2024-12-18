@@ -1,8 +1,18 @@
-# neuralboost
+# Neural Boost
 
-A new Flutter project.
+Project akhir semester untuk memenuhi kebutuhan dari Pengemabang Aplikasi Bergerak (Mobile Dev) dan Pengembangan Aplikasi Informatika Medis 
 
-## Getting Started
+## Tentang Aplikasi
+
+Neural Boost adalah aplikasi membantu ..
+
+
+## SDK
+-Java JDK 19
+-Gradle 8.0
+-Flutter 3.24.5
+
+## Build Mengunakan Flutter, maaf kalo masih berantakan
 
 This project is a starting point for a Flutter application.
 
