@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../helpers/phone_properties.dart';
 import 'controller/sequence_memory_controller.dart';
 import 'controller/sequence_memory_value_controller.dart';
+import 'package:neuralboost/services/gamificate_service.dart'; // Import GamificateService
 
 class SequenceMemory extends StatefulWidget {
   SequenceMemory({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class SequenceMemory extends StatefulWidget {
 class _SequenceMemoryState extends State<SequenceMemory> {
   late SequenceMemoryController sequenceMemoryController;
   late SequenceMemoryValueController sequenceMemoryValueController;
+  final GamificateService _gamificateService =
+      GamificateService(); // Instantiate GamificateService
 
   @override
   void initState() {
@@ -26,6 +29,7 @@ class _SequenceMemoryState extends State<SequenceMemory> {
   @override
   void dispose() {
     sequenceMemoryValueController.hardReset();
+    _gamificateService.addPoints(10); // Award points when the game is completed
     super.dispose();
   }
 

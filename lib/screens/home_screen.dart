@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:neuralboost/import/games/pages/reaction_time/reaction_time_page.dart';
 import 'package:neuralboost/screens/todo_list_screen.dart';
+import 'package:neuralboost/services/gamificate_service.dart';
 
 import '../import/games/pages/numbers_memory/numbers_memory_page.dart';
 import '../import/games/pages/sequence_memory/sequence_memory_page.dart';
@@ -53,8 +54,15 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Header Section: Progress Tracker
   Widget _buildHeaderSection(BuildContext context) {
+    final GamificateService _gamificateService = GamificateService();
+
+    // Dynamically calculate the current level based on points
+    String currentLevel = _gamificateService.calculateLevel(user.points);
+
+    // Calculate the next level points
+    int nextLevelPoints = _getNextLevelPoints(currentLevel);
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
@@ -65,7 +73,14 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Your Progress',
+            'Your Points: ${user.points}',
+            style: AppTheme.titleMedium.copyWith(
+              color: AppTheme.backgroundColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Your Level: $currentLevel', // Use dynamically calculated level
             style: AppTheme.titleMedium.copyWith(
               color: AppTheme.backgroundColor,
               fontWeight: FontWeight.bold,
@@ -73,14 +88,14 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           LinearProgressIndicator(
-            value: 0.7, // Example progress value
+            value: user.points / nextLevelPoints, // Progress towards next level
             backgroundColor: AppTheme.backgroundColor.withOpacity(0.3),
             valueColor:
                 const AlwaysStoppedAnimation<Color>(AppTheme.accentColor),
           ),
           const SizedBox(height: 10),
           Text(
-            '70% Focus Improved',
+            '${(user.points / nextLevelPoints * 100).toStringAsFixed(2)}% to next level',
             style: AppTheme.bodyMedium.copyWith(
               color: Colors.white,
             ),
@@ -88,6 +103,34 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+// Helper method to calculate the points required for the next level
+  int _getNextLevelPoints(String currentLevel) {
+    switch (currentLevel) {
+      case 'Rookie I':
+        return 200; // Next level is Rookie II
+      case 'Rookie II':
+        return 400; // Next level is Rookie III
+      case 'Rookie III':
+        return 600; // Next level is Senior I
+      case 'Senior I':
+        return 900; // Next level is Senior II
+      case 'Senior II':
+        return 1200; // Next level is Senior III
+      case 'Senior III':
+        return 1500; // Next level is Master I
+      case 'Master I':
+        return 2000; // Next level is Master II
+      case 'Master II':
+        return 2500; // Next level is Master III
+      case 'Master III':
+        return 3000; // Next level is Mind Focus
+      case 'Mind Focus':
+        return 3000; // Infinite progression, no next level
+      default:
+        return 3000; // Default to 3000 points
+    }
   }
 
   // Section Title

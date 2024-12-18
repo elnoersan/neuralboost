@@ -1,8 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart'
+    as firebase_auth; // Use 'as' to rename the import
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart'; // Import flutter_secure_storage
 import 'package:google_sign_in/google_sign_in.dart';
-import '../models/user.dart';
+import '../models/user.dart'; // Import the User model
 
 class AuthService {
   final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
@@ -39,15 +40,12 @@ class AuthService {
         await _database.child('users').child(firebaseUser!.uid).get();
 
     if (snapshot.exists) {
+      // Convert the snapshot data to a User object
       Map<String, dynamic> userData =
           Map<String, dynamic>.from(snapshot.value as Map);
-      return User(
-        id: userData['id'],
-        email: userData['email'],
-        points: userData['points'],
-        adhdStatus: userData['adhdStatus'] ?? 'No issue or slightly affected',
-      );
+      return User.fromMap(userData);
     } else {
+      // Create a new User object if the user data doesn't exist
       return User(
         id: firebaseUser.uid,
         email: firebaseUser.email ?? 'user@example.com',
@@ -95,6 +93,7 @@ class AuthService {
         'email': email,
         'points': 0,
         'adhdStatus': 'No issue or slightly affected', // Default value
+        'level': 'Rookie I', // Default level
       });
 
       // Save the user ID token to secure storage
@@ -135,6 +134,7 @@ class AuthService {
         'email': userCredential.user!.email,
         'points': 0,
         'adhdStatus': 'No issue or slightly affected', // Default value
+        'level': 'Rookie I', // Default level
       });
 
       // Save the user ID token to secure storage

@@ -1,17 +1,18 @@
-// lib/models/user.dart
 class User {
   String id;
   String email;
   int points;
-  String adhdStatus; // Updated to store ADHD status as a string
-  DateTime? dateResponded; // Add the dateResponded field
+  String adhdStatus;
+  DateTime? dateResponded;
+  String level; // Add level field
 
   User({
     required this.id,
     required this.email,
     this.points = 0,
-    this.adhdStatus = 'No issue or slightly affected', // Default value
-    this.dateResponded, // Default to null
+    this.adhdStatus = 'No issue or slightly affected',
+    this.dateResponded,
+    this.level = 'Rookie I', // Default level
   });
 
   // Convert User object to a Map (for serialization)
@@ -21,8 +22,8 @@ class User {
       'email': email,
       'points': points,
       'adhdStatus': adhdStatus,
-      'dateResponded': dateResponded
-          ?.toIso8601String(), // Convert DateTime to ISO 8601 string
+      'dateResponded': dateResponded?.toIso8601String(),
+      'level': level,
     };
   }
 
@@ -35,7 +36,8 @@ class User {
       adhdStatus: map['adhdStatus'],
       dateResponded: map['dateResponded'] != null
           ? DateTime.parse(map['dateResponded'])
-          : null, // Parse the dateResponded field
+          : null,
+      level: map['level'] ?? 'Rookie I',
     );
   }
 }
