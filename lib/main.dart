@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       // Replace MaterialApp with GetMaterialApp
-      title: 'NeuralBoost',
+      title: 'Neural Boost',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme, // Apply the custom theme here
       home: LoginSignUpScreen(), // Set LoginSignUpScreen as the home screen

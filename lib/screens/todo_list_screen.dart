@@ -298,14 +298,13 @@ class TodoListScreen extends StatelessWidget {
     if (daysUntilTargetDate < 0) {
       return 0; // No points for overdue tasks
     } else if (daysUntilTargetDate == 0) {
-      return 5; // 5 points for tasks due today
+      return 1; // 5 points for tasks due today
     } else if (daysUntilTargetDate < 3) {
-      return 15; // 15 points for tasks due within 3 days
+      return 5; // 15 points for tasks due within 3 days
     } else if (daysUntilTargetDate < 7) {
-      return 20; // 20 points for tasks due within 7 days
+      return 10; // 20 points for tasks due within 7 days
+    } else {
+      return 30; // 30 points for tasks due in more than 7 days
     }
-
-    // No points for tasks due later than 7 days
-    return 0;
   }
 }

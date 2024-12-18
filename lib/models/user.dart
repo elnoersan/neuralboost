@@ -4,7 +4,8 @@ class User {
   int points;
   String adhdStatus;
   DateTime? dateResponded;
-  String level; // Add level field
+  String level;
+  List<String> unlockedThemes; // Track unlocked themes
 
   User({
     required this.id,
@@ -12,7 +13,8 @@ class User {
     this.points = 0,
     this.adhdStatus = 'No issue or slightly affected',
     this.dateResponded,
-    this.level = 'Rookie I', // Default level
+    this.level = 'Rookie I',
+    this.unlockedThemes = const [], // Default to empty list
   });
 
   // Convert User object to a Map (for serialization)
@@ -24,6 +26,7 @@ class User {
       'adhdStatus': adhdStatus,
       'dateResponded': dateResponded?.toIso8601String(),
       'level': level,
+      'unlockedThemes': unlockedThemes, // Include unlocked themes
     };
   }
 
@@ -38,6 +41,8 @@ class User {
           ? DateTime.parse(map['dateResponded'])
           : null,
       level: map['level'] ?? 'Rookie I',
+      unlockedThemes: List<String>.from(
+          map['unlockedThemes'] ?? []), // Parse unlocked themes
     );
   }
 }
