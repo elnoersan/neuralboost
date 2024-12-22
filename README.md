@@ -1,5 +1,3 @@
-Here's the formatted Markdown:
-
 # Neural Boost
 
 **Neural Boost** is a mobile application developed as a semester project to fulfill the requirements of Mobile Development and Medical Informatics Application Development. The app is designed to ... *(briefly describe the purpose and functionality of the application)*.
