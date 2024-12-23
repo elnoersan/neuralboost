@@ -74,10 +74,13 @@ class DrawerMenu extends StatelessWidget {
             leading: Icon(Icons.shopping_cart),
             title: Text('Exchange Your Coins'),
             onTap: () {
-              // Navigate to Shop Screen
+              // Navigate to Shop Screen and pass the User object
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ShopScreen()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ShopScreen(user: user), // Pass the user object
+                ),
               );
             },
           ),

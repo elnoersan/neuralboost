@@ -1,4 +1,3 @@
-// Model: Represents the data structure for a to-do item
 class Todo {
   final String id;
   final String title;
@@ -14,7 +13,31 @@ class Todo {
     this.isCompleted = false,
   });
 
-  // Helper method to create a copy of the Todo with updated fields
+  // Convert Todo object to a Map (for serialization)
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'targetDate':
+          targetDate.toIso8601String(), // Convert DateTime to ISO 8601 string
+      'isCompleted': isCompleted,
+    };
+  }
+
+  // Create a Todo object from a Map (for deserialization)
+  factory Todo.fromMap(Map<String, dynamic> map) {
+    return Todo(
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      targetDate: DateTime.parse(
+          map['targetDate']), // Convert ISO 8601 string to DateTime
+      isCompleted: map['isCompleted'] ?? false,
+    );
+  }
+
+  // Add the copyWith method
   Todo copyWith({
     String? id,
     String? title,
